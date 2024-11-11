@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print working directory
-        run: pwd
-      - name: List files in the directory
-        run: ls -R
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -28,9 +23,18 @@ jobs:
         id: build
         run: mvn install
 
+      - name: List files to verify generation
+        run: ls -R fluent-bot-api-library/src/main/java/it/marcodemartino
+
+      - name: Stage generated files
+        run: git add fluent-bot-api-library/src/main/java/it/marcodemartino/*.java --force
+
       - name: Check for generated changes
         id: check_changes
         run: git diff --exit-code || echo "Generated files have changed."
+
+      - name: Check git status
+        run: git status
 
       - name: Commit and push generated code
         env:
