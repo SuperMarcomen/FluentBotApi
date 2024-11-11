@@ -30,6 +30,9 @@ jobs:
         id: build
         run: mvn install --no-transfer-progress
 
+      - name: Stage generated files
+        run: git add fluent-bot-api-library/src/main/java/it/marcodemartino/*.java --force
+
       - name: Check if there are changes
         id: check_changes
         run: |
