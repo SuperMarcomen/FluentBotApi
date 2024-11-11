@@ -33,7 +33,10 @@ public class Main {
 
     try {
       String string = javaFile.toString();
-      Files.write(path, string.getBytes());
+      Files.createDirectories(path.getParent().getParent());
+      Files.createDirectories(path.getParent());
+      Files.createFile(path);
+      Files.writeString(path, string);
     } catch (java.lang.Exception e) {
       throw new RuntimeException(e);
     }
