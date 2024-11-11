@@ -19,32 +19,25 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Pull latest changes
-        run: git pull --rebase origin ${{ github.head_ref }}
+      - name: Clean up generated files (exclude .placeholder)
+        run: |
+          find fluent-bot-api-library/src/main/java/it/marcodemartino -type f ! -name ".placeholder" -exec rm -f {} +
 
       - name: Run Maven install
         id: build
         run: mvn install --no-transfer-progress
 
-      - name: List files to verify generation
-        run: ls -R fluent-bot-api-library/src/main/java/it/marcodemartino
-
-      - name: Stage generated files
-        run: git add fluent-bot-api-library/src/main/java/it/marcodemartino/*.java --force
-
-      - name: Check for generated changes
+      - name: Check if there are changes
         id: check_changes
-        run: git diff --exit-code || echo "Generated files have changed."
-
-      - name: Check git status
-        run: git status
+        run: |
+          git diff --exit-code || echo "Generated files have changed."
 
       - name: Commit and push generated code
+        if: steps.check_changes.outcome == 'success'  # Only commit if changes are detected
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto-update generated code"
+          git commit -am "Auto-update generated code"
           git push origin HEAD:${{ github.head_ref }}
