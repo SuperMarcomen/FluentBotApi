@@ -21,7 +21,7 @@ jobs:
 
       - name: Run Maven install
         id: build
-        run: mvn install
+        run: mvn install --no-transfer-progress
 
       - name: List files to verify generation
         run: ls -R fluent-bot-api-library/src/main/java/it/marcodemartino
