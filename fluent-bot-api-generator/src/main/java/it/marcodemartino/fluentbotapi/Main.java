@@ -32,7 +32,7 @@ public class Main {
         .build();
 
     Path path = Paths.get("./fluent-bot-api-library/src/main/java/it/marcodemartino/HelloWorld.java");
-    Arrays.stream(path.getParent().toFile().listFiles()).forEach(File::delete);
+    Arrays.stream(path.getParent().toFile().listFiles()).filter(file -> file.getName().equals(".placeholder")).forEach(File::delete);
 
     try {
       String string = javaFile.toString();
