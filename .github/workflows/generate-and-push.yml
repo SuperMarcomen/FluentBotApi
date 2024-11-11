@@ -20,13 +20,15 @@ jobs:
           java-version: '17'
 
       - name: Run Maven install
+        id: build
         run: mvn install
 
       - name: Check for generated changes
+        id: check_changes
         run: git diff --exit-code || echo "Generated files have changed."
 
       - name: Commit and push generated code
-        if: ${{ steps.[previous step id].outcome == 'failure' }} # Only run if changes were detected
+        if: ${{ steps.check_changes.outcome == 'failure' }} # Only run if changes were detected
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
