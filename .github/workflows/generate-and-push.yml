@@ -19,6 +19,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Pull latest changes
+        run: git pull --rebase origin ${{ github.head_ref }}
+
       - name: Run Maven install
         id: build
         run: mvn install --no-transfer-progress
@@ -35,9 +38,6 @@ jobs:
 
       - name: Check git status
         run: git status
-
-      - name: Pull latest changes
-        run: git pull --rebase origin ${{ github.head_ref }}
 
       - name: Commit and push generated code
         env:
