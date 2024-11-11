@@ -36,6 +36,9 @@ jobs:
       - name: Check git status
         run: git status
 
+      - name: Pull latest changes
+        run: git pull --rebase origin ${{ github.head_ref }}
+
       - name: Commit and push generated code
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
