@@ -46,6 +46,7 @@ public class Main {
           });
         });
 
+
     for (Type type : botApi.types().values()) {
       List<FieldSpec> list = new ArrayList<>();
       if (type.fields() == null) {
