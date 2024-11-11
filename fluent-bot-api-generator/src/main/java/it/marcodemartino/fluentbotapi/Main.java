@@ -3,13 +3,11 @@ package it.marcodemartino.fluentbotapi;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import javax.lang.model.element.Modifier;
 
 public class Main {
@@ -32,7 +30,6 @@ public class Main {
         .build();
 
     Path path = Paths.get("./fluent-bot-api-library/src/main/java/it/marcodemartino/HelloWorld.java");
-    Arrays.stream(path.getParent().toFile().listFiles()).filter(file -> file.getName().equals(".placeholder")).forEach(File::delete);
 
     try {
       String string = javaFile.toString();
