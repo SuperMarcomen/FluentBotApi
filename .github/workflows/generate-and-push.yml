@@ -3,7 +3,7 @@ name: Generate and Push Code
 on:
   pull_request:
     branches:
-      - master
+      - main  # Adjust as necessary to specify the branch where pull requests are opened
 
 jobs:
   build-and-generate:
@@ -17,16 +17,18 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '17' # Adjust Java version if needed
 
       - name: Run Maven install
+        id: build
         run: mvn install
 
       - name: Check for generated changes
+        id: check_changes
         run: git diff --exit-code || echo "Generated files have changed."
 
       - name: Commit and push generated code
-        if: ${{ steps.[previous step id].outcome == 'failure' }} # Only run if changes were detected
+        if: ${{ steps.check_changes.outcome == 'failure' }} # Only run if changes were detected
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
