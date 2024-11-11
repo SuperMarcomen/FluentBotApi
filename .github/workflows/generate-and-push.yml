@@ -21,7 +21,7 @@ jobs:
 
       - name: Run Maven install
         id: build
-        run: mvn install
+        run: mvn install --no-transfer-progress
 
       - name: List files to verify generation
         run: ls -R fluent-bot-api-library/src/main/java/it/marcodemartino
@@ -44,4 +44,4 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Auto-update generated code"
-          git push
+          git push origin HEAD:${{ github.head_ref }}
