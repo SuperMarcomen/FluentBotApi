@@ -38,14 +38,13 @@ public class Main {
             .anyMatch(strings::contains)
         ).collect(Collectors.toMap(Type::name, type -> type));
 
-    botApi.types().values().stream()
+/*    botApi.types().values().stream()
         .filter(type -> type.subtypes() != null)
         .forEach(parent -> {
           parent.subtypes().forEach(subtype -> {
             System.out.println(typesToCreate.get(subtype).description());
           });
-        });
-
+        });*/
 
     for (Type type : botApi.types().values()) {
       List<FieldSpec> list = new ArrayList<>();

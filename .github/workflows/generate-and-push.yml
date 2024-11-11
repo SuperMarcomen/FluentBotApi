@@ -3,7 +3,7 @@ name: Generate and Push Code
 on:
   pull_request:
     branches:
-      - main  # Adjust as necessary to specify the branch where pull requests are opened
+      - master
 
 jobs:
   build-and-generate:
@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17' # Adjust Java version if needed
+          java-version: '17'
 
       - name: Run Maven install
         id: build
