@@ -33,7 +33,7 @@ public class Main {
 
     try {
       String string = javaFile.toString();
-      Files.writeString(path, string);
+      // Files.writeString(path, string);
     } catch (java.lang.Exception e) {
       throw new RuntimeException(e);
     }
