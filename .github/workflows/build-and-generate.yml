@@ -1,4 +1,4 @@
-name: Generate and Push Code
+name: Build and generate code
 
 on:
   pull_request:
@@ -8,7 +8,6 @@ on:
 jobs:
   build-and-generate:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,7 +27,3 @@ jobs:
       - name: Run Maven install
         id: build
         run: mvn install --no-transfer-progress
-
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-            commit_message: "Generate code [skip ci]"
