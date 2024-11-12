@@ -1,5 +1,20 @@
 package it.marcodemartino;
 
-public record ChatBoost(String boostId, Integer addDate, Integer expirationDate,
-    ChatBoostSource source) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ChatBoost {
+  String boostId;
+
+  Integer addDate;
+
+  Integer expirationDate;
+
+  ChatBoostSource source;
 }

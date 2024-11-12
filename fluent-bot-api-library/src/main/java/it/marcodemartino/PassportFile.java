@@ -1,4 +1,20 @@
 package it.marcodemartino;
 
-public record PassportFile(String fileId, String fileUniqueId, Integer fileSize, Integer fileDate) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class PassportFile {
+  String fileId;
+
+  String fileUniqueId;
+
+  Integer fileSize;
+
+  Integer fileDate;
 }

@@ -1,4 +1,14 @@
 package it.marcodemartino;
 
-public record MessageAutoDeleteTimerChanged(Integer messageAutoDeleteTime) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class MessageAutoDeleteTimerChanged {
+  Integer messageAutoDeleteTime;
 }

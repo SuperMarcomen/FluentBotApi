@@ -1,6 +1,17 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record PassportData(List<EncryptedPassportElement> data, EncryptedCredentials credentials) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class PassportData {
+  List<EncryptedPassportElement> data;
+
+  EncryptedCredentials credentials;
 }

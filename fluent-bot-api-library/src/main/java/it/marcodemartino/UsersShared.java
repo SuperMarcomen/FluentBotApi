@@ -1,6 +1,17 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record UsersShared(Integer requestId, List<SharedUser> users) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class UsersShared {
+  Integer requestId;
+
+  List<SharedUser> users;
 }

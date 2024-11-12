@@ -1,4 +1,18 @@
 package it.marcodemartino;
 
-public record ForceReply(Boolean forceReply, String inputFieldPlaceholder, Boolean selective) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ForceReply {
+  Boolean forceReply;
+
+  String inputFieldPlaceholder;
+
+  Boolean selective;
 }

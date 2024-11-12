@@ -1,5 +1,18 @@
 package it.marcodemartino;
 
-public record WriteAccessAllowed(Boolean fromRequest, String webAppName,
-    Boolean fromAttachmentMenu) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class WriteAccessAllowed {
+  Boolean fromRequest;
+
+  String webAppName;
+
+  Boolean fromAttachmentMenu;
 }

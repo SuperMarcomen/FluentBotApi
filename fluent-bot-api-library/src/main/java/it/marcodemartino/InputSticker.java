@@ -1,7 +1,23 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record InputSticker(InputFile sticker, String format, List<String> emojiList,
-    MaskPosition maskPosition, List<String> keywords) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class InputSticker {
+  InputFile sticker;
+
+  String format;
+
+  List<String> emojiList;
+
+  MaskPosition maskPosition;
+
+  List<String> keywords;
 }

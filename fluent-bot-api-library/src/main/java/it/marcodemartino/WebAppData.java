@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record WebAppData(String data, String buttonText) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class WebAppData {
+  String data;
+
+  String buttonText;
 }

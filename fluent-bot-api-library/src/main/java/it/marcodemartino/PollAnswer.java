@@ -1,6 +1,21 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record PollAnswer(String pollId, Chat voterChat, User user, List<Integer> optionIds) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class PollAnswer {
+  String pollId;
+
+  Chat voterChat;
+
+  User user;
+
+  List<Integer> optionIds;
 }

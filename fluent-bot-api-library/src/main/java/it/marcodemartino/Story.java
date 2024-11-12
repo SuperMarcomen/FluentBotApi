@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record Story(Chat chat, Integer id) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class Story {
+  Chat chat;
+
+  Integer id;
 }

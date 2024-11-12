@@ -1,4 +1,18 @@
 package it.marcodemartino;
 
-public record ForumTopicCreated(String name, Integer iconColor, String iconCustomEmojiId) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ForumTopicCreated {
+  String name;
+
+  Integer iconColor;
+
+  String iconCustomEmojiId;
 }

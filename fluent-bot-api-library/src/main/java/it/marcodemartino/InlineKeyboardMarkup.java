@@ -1,6 +1,15 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record InlineKeyboardMarkup(List<List<InlineKeyboardButton>> inlineKeyboard) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class InlineKeyboardMarkup {
+  List<List<InlineKeyboardButton>> inlineKeyboard;
 }

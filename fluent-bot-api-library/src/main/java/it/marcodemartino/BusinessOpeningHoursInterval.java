@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record BusinessOpeningHoursInterval(Integer openingMinute, Integer closingMinute) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class BusinessOpeningHoursInterval {
+  Integer openingMinute;
+
+  Integer closingMinute;
 }

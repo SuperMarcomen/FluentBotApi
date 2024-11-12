@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record ReactionCount(ReactionType type, Integer totalCount) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ReactionCount {
+  ReactionType type;
+
+  Integer totalCount;
 }

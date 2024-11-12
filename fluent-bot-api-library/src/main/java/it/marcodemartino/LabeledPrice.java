@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record LabeledPrice(String label, Integer amount) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class LabeledPrice {
+  String label;
+
+  Integer amount;
 }

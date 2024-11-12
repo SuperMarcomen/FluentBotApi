@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record ReplyKeyboardRemove(Boolean removeKeyboard, Boolean selective) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ReplyKeyboardRemove {
+  Boolean removeKeyboard;
+
+  Boolean selective;
 }

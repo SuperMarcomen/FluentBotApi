@@ -1,4 +1,18 @@
 package it.marcodemartino;
 
-public record ProximityAlertTriggered(User traveler, User watcher, Integer distance) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ProximityAlertTriggered {
+  User traveler;
+
+  User watcher;
+
+  Integer distance;
 }

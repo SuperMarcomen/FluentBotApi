@@ -1,5 +1,20 @@
 package it.marcodemartino;
 
-public record GiveawayCompleted(Integer winnerCount, Integer unclaimedPrizeCount,
-    Message giveawayMessage, Boolean isStarGiveaway) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class GiveawayCompleted {
+  Integer winnerCount;
+
+  Integer unclaimedPrizeCount;
+
+  Message giveawayMessage;
+
+  Boolean isStarGiveaway;
 }

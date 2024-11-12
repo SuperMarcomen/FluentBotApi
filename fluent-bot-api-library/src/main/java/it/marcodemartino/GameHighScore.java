@@ -1,4 +1,18 @@
 package it.marcodemartino;
 
-public record GameHighScore(Integer position, User user, Integer score) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class GameHighScore {
+  Integer position;
+
+  User user;
+
+  Integer score;
 }

@@ -1,7 +1,17 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record BusinessOpeningHours(String timeZoneName,
-    List<BusinessOpeningHoursInterval> openingHours) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class BusinessOpeningHours {
+  String timeZoneName;
+
+  List<BusinessOpeningHoursInterval> openingHours;
 }

@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record ChatLocation(Location location, String address) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ChatLocation {
+  Location location;
+
+  String address;
 }

@@ -1,7 +1,21 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record MessageReactionCountUpdated(Chat chat, Integer messageId, Integer date,
-    List<ReactionCount> reactions) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class MessageReactionCountUpdated {
+  Chat chat;
+
+  Integer messageId;
+
+  Integer date;
+
+  List<ReactionCount> reactions;
 }

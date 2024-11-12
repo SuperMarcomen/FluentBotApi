@@ -1,4 +1,20 @@
 package it.marcodemartino;
 
-public record MaskPosition(String point, Float xShift, Float yShift, Float scale) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class MaskPosition {
+  String point;
+
+  Float xShift;
+
+  Float yShift;
+
+  Float scale;
 }

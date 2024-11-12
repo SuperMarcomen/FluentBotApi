@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record BusinessLocation(String address, Location location) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class BusinessLocation {
+  String address;
+
+  Location location;
 }

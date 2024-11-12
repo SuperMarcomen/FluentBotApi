@@ -1,6 +1,15 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record VideoChatParticipantsInvited(List<User> users) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class VideoChatParticipantsInvited {
+  List<User> users;
 }

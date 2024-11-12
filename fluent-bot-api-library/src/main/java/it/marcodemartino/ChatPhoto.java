@@ -1,5 +1,20 @@
 package it.marcodemartino;
 
-public record ChatPhoto(String smallFileId, String smallFileUniqueId, String bigFileId,
-    String bigFileUniqueId) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ChatPhoto {
+  String smallFileId;
+
+  String smallFileUniqueId;
+
+  String bigFileId;
+
+  String bigFileUniqueId;
 }

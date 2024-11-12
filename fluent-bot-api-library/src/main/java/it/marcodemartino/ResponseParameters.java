@@ -1,4 +1,16 @@
 package it.marcodemartino;
 
-public record ResponseParameters(Integer migrateToChatId, Integer retryAfter) {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ResponseParameters {
+  Integer migrateToChatId;
+
+  Integer retryAfter;
 }

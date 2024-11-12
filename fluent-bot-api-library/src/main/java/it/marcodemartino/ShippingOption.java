@@ -1,6 +1,19 @@
 package it.marcodemartino;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public record ShippingOption(String id, String title, List<LabeledPrice> prices) {
+@Setter
+@Getter
+@Accessors(
+    fluent = true
+)
+public final class ShippingOption {
+  String id;
+
+  String title;
+
+  List<LabeledPrice> prices;
 }
