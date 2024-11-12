@@ -17,7 +17,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <mainClass>it.marcodemartino.fluentbotapi.Main</mainClass>
+                    <mainClass>it.marcodemartino.fluentbotapi.Generator</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -35,6 +35,12 @@
             <artifactId>gson</artifactId>
             <version>2.11.0</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

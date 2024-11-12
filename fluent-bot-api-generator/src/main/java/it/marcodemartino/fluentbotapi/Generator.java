@@ -2,6 +2,7 @@ package it.marcodemartino.fluentbotapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -16,53 +17,36 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import javax.lang.model.element.Modifier;
 
-public class Main {
+public class Generator {
 
   public static void main(String[] args) throws URISyntaxException, IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String json = Files.readString(Paths.get(Main.class.getResource("/api.json").toURI()));
+    String json = Files.readString(Paths.get(Generator.class.getResource("/api.json").toURI()));
     BotApi botApi = gson.fromJson(json, BotApi.class);
-
-    List<String> strings = List.of("String", "Boolean", "Float");
-
-    Map<String, Type> typesToCreate = botApi.types().values().stream()
-        .filter(type -> type.fields() != null && type.fields().size() <= 1)
-        .filter(type -> type.fields()
-            .stream()
-            .map(Field::types)
-            .flatMap(List::stream)
-            .anyMatch(strings::contains)
-        ).collect(Collectors.toMap(Type::name, type -> type));
-
-    botApi.types().values().stream()
-        .filter(type -> type.subtypes() != null)
-        .forEach(parent -> {
-          parent.subtypes().forEach(subtype -> {
-            System.out.println(typesToCreate.get(subtype).description());
-          });
-        });
+    new TypesGenerator(botApi);
 
     for (Type type : botApi.types().values()) {
       List<FieldSpec> list = new ArrayList<>();
-      if (type.fields() == null) {
+      // Skip parent and child classes (Handled separately)
+      if (type.subtypes() != null || type.subtypeOf() != null) {
         continue;
       }
-      if (type.fields().size() == 1) {
-        System.out.println(type.fields().get(0).types().get(0));
+
+      if (type.fields() != null) {
+        for (Field field : type.fields()) {
+          FieldSpec build = FieldSpec.builder(ParserUtils.parseType(field.types().get(0)),
+              ParserUtils.snakeToCamelCase(field.name())).build();
+          list.add(build);
+        }
       }
 
-      for (Field field : type.fields()) {
-        FieldSpec build = FieldSpec.builder(ClassName.get("it.marcodemartino", field.types().get(0)), field.name()).build();
-        list.add(build);
-      }
-
-      TypeSpec newClass = TypeSpec.recordBuilder(type.name())
-          .addFields(list
-          )
+      TypeSpec newClass = TypeSpec.classBuilder(type.name())
+          .addFields(list)
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Setter")).build())
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Getter")).build())
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok.experimental", "Accessors")).addMember("fluent", "$L", true).build())
           .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
           .build();
 
