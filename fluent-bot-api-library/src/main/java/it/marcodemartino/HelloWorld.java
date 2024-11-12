@@ -5,6 +5,6 @@ import java.lang.System;
 
 public final class HelloWorld {
   public static void main(String[] args) {
-    System.out.println("Hello test 2, JavaPoet!");
+    System.out.println("Hello test 3, JavaPoet!");
   }
 }
