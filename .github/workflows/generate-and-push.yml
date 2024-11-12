@@ -31,4 +31,4 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-            commit_message: "Generate code"
+            commit_message: "Generate code [skip ci]"
