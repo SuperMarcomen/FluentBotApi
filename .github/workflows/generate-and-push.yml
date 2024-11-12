@@ -30,10 +30,13 @@ jobs:
         id: build
         run: mvn install --no-transfer-progress
 
+      - name: Stage generated files
+        run: git add fluent-bot-api-library/src/main/java/it/marcodemartino/*.java --force
+
       - name: Check if there are changes
         id: check_changes
         run: |
-          git diff --exit-code || echo "Generated files have changed."
+          git diff --exit-code
 
       - name: Commit and push generated code
         if: steps.check_changes.outcome == 'success'  # Only commit if changes are detected
