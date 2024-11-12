@@ -28,7 +28,7 @@
                             <id>exec-one</id>
                             <phase>compile</phase> <!-- You can remove or change this to "compile" if it should only run after the project is compiled -->
                             <configuration>
-                                <mainClass>it.marcodemartino.fluentbotapi.Main</mainClass>
+                                <mainClass>it.marcodemartino.fluentbotapi.Generator</mainClass>
                             </configuration>
                             <goals>
                                 <goal>java</goal> <!-- Use "java" to run a Java class -->

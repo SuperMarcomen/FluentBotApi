@@ -19,51 +19,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.util.Types;
 
-public class Main {
+public class Generator {
 
   public static void main(String[] args) throws URISyntaxException, IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    String json = Files.readString(Paths.get(Main.class.getResource("/api.json").toURI()));
+    String json = Files.readString(Paths.get(Generator.class.getResource("/api.json").toURI()));
     BotApi botApi = gson.fromJson(json, BotApi.class);
-
-    List<String> strings = List.of("String", "Boolean", "Float");
-
-    Map<String, Type> typesToCreate = botApi.types().values().stream()
-        .filter(type -> type.fields() != null && type.fields().size() <= 1)
-        .filter(type -> type.fields()
-            .stream()
-            .map(Field::types)
-            .flatMap(List::stream)
-            .anyMatch(strings::contains)
-        ).collect(Collectors.toMap(Type::name, type -> type));
-
-    botApi.types().values().stream()
-        .filter(type -> type.subtypes() != null)
-        .forEach(parent -> {
-          parent.subtypes().forEach(subtype -> {
-            System.out.println(typesToCreate.get(subtype).description());
-          });
-        });
+    new TypesGenerator(botApi);
 
     for (Type type : botApi.types().values()) {
       List<FieldSpec> list = new ArrayList<>();
-      if (type.fields() == null) {
+      // Skip parent and child classes (Handled separately)
+      if (type.subtypes() != null || type.subtypeOf() != null) {
         continue;
       }
-      if (type.fields().size() == 1) {
-        System.out.println(type.fields().get(0).types().get(0));
-      }
 
-      for (Field field : type.fields()) {
-        FieldSpec build = FieldSpec.builder(ClassName.get("it.marcodemartino", field.types().get(0)), field.name()).build();
-        list.add(build);
+      if (type.fields() != null) {
+        for (Field field : type.fields()) {
+          FieldSpec build = FieldSpec.builder(ParserUtils.parseType(field.types().get(0)),
+              ParserUtils.snakeToCamelCase(field.name())).build();
+          list.add(build);
+        }
       }
 
       TypeSpec newClass = TypeSpec.recordBuilder(type.name())
-          .addFields(list
-          )
-          .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+          .addFields(list)
+          .addModifiers(Modifier.PUBLIC)
           .build();
 
       JavaFile javaFile = JavaFile.builder("it.marcodemartino", newClass)

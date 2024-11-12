@@ -17,7 +17,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <mainClass>it.marcodemartino.fluentbotapi.Main</mainClass>
+                    <mainClass>it.marcodemartino.fluentbotapi.Generator</mainClass>
                 </configuration>
             </plugin>
         </plugins>
