@@ -2,6 +2,7 @@ package it.marcodemartino.fluentbotapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -16,10 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import javax.lang.model.element.Modifier;
-import javax.lang.model.util.Types;
 
 public class Generator {
 
@@ -44,9 +42,12 @@ public class Generator {
         }
       }
 
-      TypeSpec newClass = TypeSpec.recordBuilder(type.name())
+      TypeSpec newClass = TypeSpec.classBuilder(type.name())
           .addFields(list)
-          .addModifiers(Modifier.PUBLIC)
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Setter")).build())
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Getter")).build())
+          .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok.experimental", "Accessors")).addMember("fluent", "$L", true).build())
+          .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
           .build();
 
       JavaFile javaFile = JavaFile.builder("it.marcodemartino", newClass)

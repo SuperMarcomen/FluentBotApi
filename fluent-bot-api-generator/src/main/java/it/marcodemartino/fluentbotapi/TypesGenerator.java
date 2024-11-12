@@ -1,8 +1,9 @@
 package it.marcodemartino.fluentbotapi;
 
+import com.squareup.javapoet.AnnotationSpec;
+import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import it.marcodemartino.fluentbotapi.entities.BotApi;
 import it.marcodemartino.fluentbotapi.entities.Field;
@@ -60,6 +61,9 @@ public class TypesGenerator {
 
     TypeSpec newClass = TypeSpec.classBuilder(child.name())
         .addFields(classAttributes)
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Setter")).build())
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Getter")).build())
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok.experimental", "Accessors")).addMember("fluent", "$L", true).build())
         .superclass(ParserUtils.parseType(parent.name()))
         .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
         .build();
@@ -81,6 +85,9 @@ public class TypesGenerator {
 
     TypeSpec newClass = TypeSpec.classBuilder(parent.name())
         .addFields(classAttributes)
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Setter")).build())
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "Getter")).build())
+        .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok.experimental", "Accessors")).addMember("fluent", "$L", true).build())
         .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
         .build();
 
