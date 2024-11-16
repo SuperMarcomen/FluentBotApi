@@ -18,7 +18,7 @@ import javax.lang.model.element.Modifier;
 
 public class JavaFileGenerator {
 
-  public static final String DEFAULT_PATH = "./fluent-bot-api-library/src/main/java/it/marcodemartino/fluentbotapi/%s.java";
+  public static final String DEFAULT_PATH = "./fluent-bot-api-library/src/main/java/it/marcodemartino/fluentbotapi/entities/%s.java";
   private final String name;
   private Builder typeSpecBuilder;
 
@@ -61,7 +61,7 @@ public class JavaFileGenerator {
   }
 
   public JavaFileGenerator save() {
-    JavaFile javaFile = JavaFile.builder("it.marcodemartino.fluentbotapi", typeSpecBuilder.build())
+    JavaFile javaFile = JavaFile.builder("it.marcodemartino.fluentbotapi.entities", typeSpecBuilder.build())
         .build();
 
     Path path = Paths.get(DEFAULT_PATH.formatted(name));

@@ -24,7 +24,7 @@ public class ParserUtils {
       }
 
       // Build nested parameterized types, starting from the innermost type
-      TypeName type = ClassName.get("it.marcodemartino.fluentbotapi", field.replaceAll("Integer", "Long"));
+      TypeName type = ClassName.get("it.marcodemartino.fluentbotapi.entities", field.replaceAll("Integer", "Long"));
       for (int i = 0; i < depth; i++) {
         type = ParameterizedTypeName.get(ClassName.get(List.class), type);
       }
@@ -32,7 +32,7 @@ public class ParserUtils {
     }
 
     String fieldType = field.replaceAll("Integer", "long").replaceAll("Float", "float");
-    return ClassName.get("it.marcodemartino.fluentbotapi", fieldType);
+    return ClassName.get("it.marcodemartino.fluentbotapi.entities", fieldType);
   }
 
 }
