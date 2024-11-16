@@ -9,4 +9,14 @@ public record Field(
     String description
 ) {
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof Field field)) {
+      return false;
+    }
+    return name.equals(field.name) && types.equals(field.types);
+  }
 }

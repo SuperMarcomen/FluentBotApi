@@ -13,8 +13,8 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <build>
@@ -23,12 +23,13 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.5.0</version>
                     <executions>
                         <execution>
                             <id>exec-one</id>
                             <phase>compile</phase> <!-- You can remove or change this to "compile" if it should only run after the project is compiled -->
                             <configuration>
-                                <mainClass>it.marcodemartino.fluentbotapi.Main</mainClass>
+                                <mainClass>it.marcodemartino.fluentbotapi.Generator</mainClass>
                             </configuration>
                             <goals>
                                 <goal>java</goal> <!-- Use "java" to run a Java class -->
@@ -39,4 +40,16 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.34</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
