@@ -1,4 +1,4 @@
-package it.marcodemartino.fluentbotapi;
+package it.marcodemartino.fluentbotapi.utils;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.ParameterizedTypeName;
@@ -24,14 +24,15 @@ public class ParserUtils {
       }
 
       // Build nested parameterized types, starting from the innermost type
-      TypeName type = ClassName.get("it.marcodemartino", field);
+      TypeName type = ClassName.get("it.marcodemartino.fluentbotapi", field.replaceAll("Integer", "Long"));
       for (int i = 0; i < depth; i++) {
         type = ParameterizedTypeName.get(ClassName.get(List.class), type);
       }
       return type;
     }
 
-    return ClassName.get("it.marcodemartino", field);
+    String fieldType = field.replaceAll("Integer", "long").replaceAll("Float", "float");
+    return ClassName.get("it.marcodemartino.fluentbotapi", fieldType);
   }
 
 }
