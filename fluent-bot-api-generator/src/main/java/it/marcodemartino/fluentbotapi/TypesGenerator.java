@@ -8,6 +8,7 @@ import com.squareup.javapoet.TypeSpec;
 import it.marcodemartino.fluentbotapi.entities.BotApi;
 import it.marcodemartino.fluentbotapi.entities.Field;
 import it.marcodemartino.fluentbotapi.entities.Type;
+import it.marcodemartino.fluentbotapi.utils.ParserUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
